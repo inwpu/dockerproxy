@@ -1,8 +1,7 @@
 name = "dc"
 main = "docker.js"
 compatibility_date = "2025-09-03"
-compatibility_flags = ["streams_enable_constructors"]
-compatibility_flags = ["nodejs_compat"]
+compatibility_flags = ["streams_enable_constructors", "nodejs_compat"]
 workers_dev = false
 routes = [
   "hub.hxorz.cn/*",
