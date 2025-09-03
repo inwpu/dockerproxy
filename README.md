@@ -13,14 +13,10 @@
 
 ---
 
-##  示例地址
-
-> 已部署地址：  
+## 已部署地址：  
 > https://hub.hxorz.cn/
 
 ## 使用说明
-
-支持与 Docker 命令行无缝兼容：
 
 可直接用于 Docker 客户端的拉取命令：
 
@@ -69,6 +65,59 @@ hub.hxorz.cn/klee/klee                  latest    cc49b2cfae90   18 months ago
 
 <img width="1197" height="990" alt="image" src="https://github.com/user-attachments/assets/c1177594-a2a8-43ff-b762-858701f3f7ef" />
 
+## docker daemon.json配置
+
+在 `/etc/docker/daemon.json` 添加：
+
+```
+{
+  "registry-mirrors": ["https://hub.hxorz.cn"]
+}
+```
+然后重启 Docker 服务：
+
+```
+sudo systemctl restart docker
+```
+
+成功后拉取镜像：
+```
+(base) hx@orz:/etc/docker$ sudo docker pull dockurr/windows
+Using default tag: latest
+latest: Pulling from dockurr/windows
+649717aac3d0: Pull complete 
+d3b0db4c1afe: Pull complete 
+ef5f211c6299: Pull complete 
+8972b239f410: Pull complete 
+0563f8f178d3: Pull complete 
+37876d7217d8: Pull complete 
+Digest: sha256:fe953a6a2f4686a9f0a540d9f9ad42b57ddad83af2050e91a0a8b1a6828bc8f5
+Status: Downloaded newer image for dockurr/windows:latest
+docker.io/dockurr/windows:latest
+(base) hx@orz:/etc/docker$ sudo docker pull verilator/verilator
+Using default tag: latest
+latest: Pulling from verilator/verilator
+b71466b94f26: Pull complete 
+27d124b1681b: Pull complete 
+4f4fb700ef54: Pull complete 
+9417454e0e36: Pull complete 
+7c733edd3fa4: Pull complete 
+e8a25f683f51: Pull complete 
+Digest: sha256:0ea5e558e6b99051458d92fb409051eaa46993861ec3a7a30ca580516c4838f2
+Status: Downloaded newer image for verilator/verilator:latest
+docker.io/verilator/verilator:latest
+(base) hx@orz:/etc/docker$ sudo docker images
+REPOSITORY            TAG       IMAGE ID       CREATED         SIZE
+verilator/verilator   latest    c273f7f29117   3 days ago      578MB
+dockurr/windows       latest    df07df026e7d   4 months ago    393MB
+busybox               latest    0ed463b26dae   11 months ago   4.43MB
+(base) hx@orz:/etc/docker$ cat daemon.json 
+{
+  "registry-mirrors": ["https://hub.hxorz.cn"]
+}
+```
+<img width="1780" height="1049" alt="image" src="https://github.com/user-attachments/assets/5300098b-43e5-40f0-b487-5750401e062c" />
+
 ## 功能特性
 
  自动代理 /v2/ 目录结构与 registry 请求
@@ -84,6 +133,7 @@ hub.hxorz.cn/klee/klee                  latest    cc49b2cfae90   18 months ago
  支持 CORS 请求（可跨域使用）
 
  仅允许访问 registry-1.docker.io，防止 SSRF
+
 
  ## 项目维护者
 
