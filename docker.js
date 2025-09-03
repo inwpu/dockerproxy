@@ -1,3 +1,9 @@
+export default {
+  async fetch(request, env, ctx) {
+    return Response.redirect('https://inwpu.github.io', 302)
+  }
+}
+
 const dockerHub = 'https://registry-1.docker.io'
 
 function buildRoutes(host) {
